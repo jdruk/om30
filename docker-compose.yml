@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    env_file:
+      - ./docker/postgres/.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - gateway
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.25'
+          memory: 32M
+  
+  redis:
+    image: redis
+    command: "redis-server"
+    sysctls:
+      net.core.somaxconn: 1024
+    volumes:
+      - redis:/data
+    networks:
+      - gateway
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 64M
+        reservations:
+          cpus: '0.25'
+          memory: 32M
+
+  x-core-shared-config: &core-shared-config
+    stdin_open: true
+    tty: true
+    build:
+      context: ./crud/
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - gateway
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./crud/:/app:cached
+
+  municipe-sidekiq:
+    <<: *core-shared-config
+    command: ./bin/bundle exec sidekiq -C config/sidekiq.yml
+
+  municipe:
+    <<: *core-shared-config
+    command: ./bin/rails s -b 0.0.0.0
+
+volumes:
+  postgres:
+  redis:
+
+networks:
+  gateway:

@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  database: <%= ENV['POSTGRES_DB'] || 'Crud' %>
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+  host: <%= ENV['POSTGRES_HOST'] || 'postgres' %>
+  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'postgres' %>
+  encoding: "utf8"
+  reconnect: true
+
+development:
+  <<: *default
+  template: template0
+test:
+  <<: *default
+  template: template0
+  database: Crud_test_<%= ENV['TEST_ENV_NUMBER'] %>
+
+production:
+  <<: *default
+  adapter: "postgresql"
+  pool: 25
+
+staging:
+  <<: *default
+  adapter: "postgresql"
+  pool: 25

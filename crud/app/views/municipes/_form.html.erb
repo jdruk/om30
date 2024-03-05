@@ -1,0 +1,92 @@
+<div data-controller="municipes"> 
+  <%= form_with(model: municipe, html: { multipart: true, class: 'row g-3' }) do |form| %>
+    <% if municipe.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(municipe.errors.count, "error") %> prohibited this municipe from being saved:</h2>
+
+        <ul>
+          <% municipe.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="col-md-12">
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :phone, class: 'form-label' %>
+      <%= form.text_field :phone, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :email, class: 'form-label' %>
+      <%= form.text_field :email, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :status, class: 'form-label' %>
+      <%= form.text_field :status, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :cpf, class: 'form-label' %>
+      <%= form.text_field :cpf, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :cns, class: 'form-label' %>
+      <%= form.text_field :cns, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="col-md-4">
+      <%= form.label :birthdate, class: 'form-label' %>
+      <%= form.date_field :birthdate, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :photo, class: 'form-label' %>
+      <%= form.file_field :photo, class: 'form-control', required: true  %>
+    </div>
+
+    <%= form.fields_for :address do |address_fields| %>
+
+      <div class="col-md-4">
+        <%= address_fields.label :zip_code %>
+        <%= address_fields.text_field :zip_code, class: 'form-control', required: true   %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= address_fields.label :public_place %>
+        <%= address_fields.text_field :public_place, class: 'form-control', required: true   %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= address_fields.label :city %>
+        <%= address_fields.text_field :city, class: 'form-control', required: true   %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= address_fields.label :uf %>
+        <%= address_fields.collection_select :uf, MunicipesHelper.ufs, :sigla, :nome, class: 'form-control', required: true   %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= address_fields.label :ibge %>
+        <%= address_fields.text_field :ibge, class: 'form-control'  %>
+      </div>
+      
+      <div class="col-md-4">
+        <%= address_fields.label :complement %>
+        <%= address_fields.text_field :complement, class: 'form-control'  %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

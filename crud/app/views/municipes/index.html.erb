@@ -1,0 +1,16 @@
+<div class="alert alert-primary" role="alert">
+  <%= notice %>
+</div>
+
+<h1>Municipes</h1>
+
+<div id="municipes">
+  <% @municipes.each do |municipe| %>
+    <%= render municipe %>
+    <p>
+      <%= link_to "Detalhes", municipe, class: "btn btn-secondary" %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Criar", new_municipe_path, class: "btn btn-primary" %>

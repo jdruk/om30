@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    models:
+      municipe: Municipe
+      address: Endereço
+    attributes:
+      municipe:
+        name: Nome
+        phone: Telefone
+        email: E-mail
+        status: Status
+        cpf: CPF
+        cns: "Cartão nacional de Saúde"
+        birthdate: Data de nascimento
+        photo: Fotografia
+      address:
+        zip_code: CEP
+        public_place: Logradouro
+        city: Cidade
+        uf: Estado
+        ibge: IBGE
+        complement: Complemento
+
+    #Código já existente abaixo
+    errors:
+      messages:

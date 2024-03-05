@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+address_one:
+  zip_code: zip_code
+  public_place: public_place
+  complement: complement
+  city: Fortaleza
+  uf: CE
+  ibge: ibgibgee
+  municipe: municipe_one

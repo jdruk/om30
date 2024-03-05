@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+municipe_one:
+  name: Name
+  phone: "85989405665"
+  email: email@email.com
+  cpf: "88835267404"
+  cns: 118 6653 9812 0003
+  birthdate: 2024-03-03
+  status: active
+  photo: photo
